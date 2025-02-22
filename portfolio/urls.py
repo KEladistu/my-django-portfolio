@@ -15,9 +15,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
+from django.contrib import admin
+from django.urls import path, include
+from django_distill import distill_path
+from django.shortcuts import render
+
+def home():
+    return None  # No parameters needed
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("",include("resume.urls"))
+    path("", include("resume.urls")),
+    distill_path('', lambda request: render(request, 'index.html'), name='home', distill_func=home),
 ]
